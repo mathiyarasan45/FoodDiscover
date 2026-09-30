@@ -1,0 +1,840 @@
+// Central Mock Dataset for Food Discover Platform
+
+export const currentLocationName = "Coimbatore (RS Puram)";
+
+export const cuisineCategories = [
+  { id: 'c-south-indian', name: 'South Indian', icon: '🍚', image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80', description: 'Authentic Dosa, Idli, Vada & Tiffin items' },
+  { id: 'c-north-indian', name: 'North Indian', icon: '🫓', image: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=600&q=80', description: 'Rich Gravies, Butter Naan & Paneer Delights' },
+  { id: 'c-chinese', name: 'Chinese', icon: '🥢', image: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=600&q=80', description: 'Dimsums, Fried Rice & Spicy Noodles' },
+  { id: 'c-italian', name: 'Italian', icon: '🍕', image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80', description: 'Woodfired Pizza, Creamy Pasta & Risotto' },
+  { id: 'c-fast-food', name: 'Fast Food', icon: '🍔', image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80', description: 'Juicy Burgers, Crispy Fries & Wraps' },
+  { id: 'c-seafood', name: 'Seafood', icon: '🦐', image: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80', description: 'Kovai Fish Fry, Prawn Masala & Crab Roast' },
+  { id: 'c-desserts', name: 'Desserts', icon: '🍰', image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80', description: 'Artisan Cakes, Brownies & Pastries' },
+  { id: 'c-healthy-food', name: 'Healthy Food', icon: '🥗', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80', description: 'Fresh Salads, Protein Bowls & Detox Juices' },
+  { id: 'c-parotta', name: 'Parotta', icon: '🫓', image: 'https://images.unsplash.com/photo-1604152135912-04a022e23696?auto=format&fit=crop&w=600&q=80', description: 'Bun Parotta, Ceylon Parotta & Kothu Parotta' },
+  { id: 'c-biryani', name: 'Biryani', icon: '🍲', image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80', description: 'Seeraga Samba Mutton & Spicy Dum Biryani' },
+  { id: 'c-ice-cream', name: 'Ice Cream', icon: '🍨', image: 'https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=600&q=80', description: 'Gourmet Scoops, Sundaes & Fruit Shakes' },
+  { id: 'c-homemade-food', name: 'Homemade Food', icon: '👵', image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80', description: 'Home-cooked Meals, Mess Tiffins & Curries' },
+  { id: 'c-other-food', name: 'Other Varieties', icon: '✨', image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80', description: 'Specialty Beverages, Snacks & fusion foods' }
+];
+
+export const sellerTypes = [
+  { id: 'st-hotels', name: 'Hotels', icon: '🏨', image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80', count: '42 listings' },
+  { id: 'st-restaurants', name: 'Restaurants', icon: '🍽️', image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80', count: '58 listings' },
+  { id: 'st-juice-shops', name: 'Juice Shops', icon: '🥤', image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80', count: '25 listings' },
+  { id: 'st-coffee-shops', name: 'Coffee Shops', icon: '☕', image: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80', count: '30 listings' },
+  { id: 'st-tea-shops', name: 'Tea Shops', icon: '🫖', image: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80', count: '35 listings' },
+  { id: 'st-street-food', name: 'Street Food', icon: '🍢', image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80', count: '48 listings' },
+  { id: 'st-ice-cream-shops', name: 'Ice Cream Shops', icon: '🍦', image: 'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=600&q=80', count: '20 listings' },
+  { id: 'st-mess', name: 'Mess', icon: '🍲', image: 'https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?auto=format&fit=crop&w=600&q=80', count: '18 listings' },
+  { id: 'st-other-sellers', name: 'Other Sellers', icon: '🏪', image: 'https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=600&q=80', count: '15 listings' }
+];
+
+export const foodSellersData = [
+  {
+    id: 'seller-1',
+    name: 'Annapoorna Heritage Hotel',
+    type: 'Hotels',
+    typeName: 'Hotels',
+    location: 'RS Puram, Coimbatore',
+    rating: 4.8,
+    reviewsCount: '3,450+',
+    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
+    ambienceImages: [
+      'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80'
+    ],
+    shortDescription: 'Coimbatore\'s legendary South Indian dining house famous for Crispy Ghee Roast & Filter Coffee since 1968.',
+    ratingBreakdown: { price: 4.7, quality: 4.9, quantity: 4.8, overall: 4.8 },
+    reviews: [
+      {
+        id: 'r1',
+        user: 'Karthik Subramaniam',
+        avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80',
+        rating: 5,
+        date: '2 days ago',
+        comment: 'Best Ghee Roast Dosa in Coimbatore! The sambar recipe has remained authentic for decades. Very clean dining hall.',
+        photo: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80',
+        video: null
+      },
+      {
+        id: 'r2',
+        user: 'Priya Nambiar',
+        avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80',
+        rating: 4.8,
+        date: '1 week ago',
+        comment: 'The morning breakfast set is fantastic. Don\'t miss their signature hot Kovai filter coffee!',
+        photo: null,
+        video: 'https://assets.mixkit.co/videos/preview/mixkit-chef-cooking-food-in-a-pan-43048-large.mp4'
+      }
+    ],
+    foodItemIds: ['item-1', 'item-7', 'item-8', 'item-14']
+  },
+  {
+    id: 'seller-2',
+    name: 'Kovai Seeraga Samba Biryani Hub',
+    type: 'Hotels',
+    typeName: 'Hotels',
+    location: 'Gandhipuram, Coimbatore',
+    rating: 4.9,
+    reviewsCount: '4,120+',
+    image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80',
+    ambienceImages: [
+      'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80'
+    ],
+    shortDescription: 'Traditional wood-fired Seeraga Samba Mutton & Chicken Dum Biryani cooked with farm-fresh spices.',
+    ratingBreakdown: { price: 4.6, quality: 5.0, quantity: 4.9, overall: 4.9 },
+    reviews: [
+      {
+        id: 'r3',
+        user: 'Arun Prakash',
+        avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=150&q=80',
+        rating: 5,
+        date: 'Yesterday',
+        comment: 'Unbeatable aroma and tender meat pieces. Seeraga Samba rice adds that unique Kongu flavor!',
+        photo: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80',
+        video: null
+      }
+    ],
+    foodItemIds: ['item-2', 'item-9', 'item-15']
+  },
+  {
+    id: 'seller-3',
+    name: 'Madurai Bun Parotta Grill & Street Spot',
+    type: 'Street Food',
+    typeName: 'Street Food',
+    location: 'Peelamedu, Coimbatore',
+    rating: 4.7,
+    reviewsCount: '1,890+',
+    image: 'https://images.unsplash.com/photo-1604152135912-04a022e23696?auto=format&fit=crop&w=800&q=80',
+    ambienceImages: [
+      'https://images.unsplash.com/photo-1604152135912-04a022e23696?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=80'
+    ],
+    shortDescription: 'Fluffy Madurai Bun Parottas served with rich spicy Salna and charcoal grilled chicken.',
+    ratingBreakdown: { price: 4.9, quality: 4.7, quantity: 4.8, overall: 4.7 },
+    reviews: [
+      {
+        id: 'r4',
+        user: 'Vignesh M',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
+        rating: 4.7,
+        date: '3 days ago',
+        comment: 'The softest bun parotta in town! The chicken salna combination is out of this world.',
+        photo: 'https://images.unsplash.com/photo-1604152135912-04a022e23696?auto=format&fit=crop&w=600&q=80',
+        video: null
+      }
+    ],
+    foodItemIds: ['item-3', 'item-10']
+  },
+  {
+    id: 'seller-4',
+    name: 'The Oasis Fresh Juice & Fruit Lounge',
+    type: 'Juice Shops',
+    typeName: 'Juice Shops',
+    location: 'Race Course, Coimbatore',
+    rating: 4.8,
+    reviewsCount: '1,240+',
+    image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80',
+    ambienceImages: [
+      'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80'
+    ],
+    shortDescription: '100% natural cold-pressed juices, thick Badam milkshakes, and fresh fruit bowls without added preservatives.',
+    ratingBreakdown: { price: 4.6, quality: 4.9, quantity: 4.7, overall: 4.8 },
+    reviews: [
+      {
+        id: 'r5',
+        user: 'Divya S',
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
+        rating: 5,
+        date: '4 days ago',
+        comment: 'Freshly extracted Watermelon Mint and royal Badam Milk. Great place after a jog in Race Course.',
+        photo: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80',
+        video: null
+      }
+    ],
+    foodItemIds: ['item-4', 'item-11', 'item-16']
+  },
+  {
+    id: 'seller-5',
+    name: 'Artisan Woodfired Pizza & Pasta Kitchen',
+    type: 'Restaurants',
+    typeName: 'Restaurants',
+    location: 'RS Puram, Coimbatore',
+    rating: 4.7,
+    reviewsCount: '980+',
+    image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80',
+    ambienceImages: [
+      'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80'
+    ],
+    shortDescription: 'Handcrafted Neapolitan pizzas cooked in traditional stone ovens with imported mozzarella.',
+    ratingBreakdown: { price: 4.4, quality: 4.9, quantity: 4.6, overall: 4.7 },
+    reviews: [
+      {
+        id: 'r6',
+        user: 'Rahul Mehta',
+        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
+        rating: 4.7,
+        date: '5 days ago',
+        comment: 'Authentic thin crust with fresh basil and burrata cheese. Premium European vibe.',
+        photo: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80',
+        video: null
+      }
+    ],
+    foodItemIds: ['item-5', 'item-12']
+  },
+  {
+    id: 'seller-6',
+    name: 'Scoops & Cream Artisan Gelato Parlor',
+    type: 'Ice Cream Shops',
+    typeName: 'Ice Cream Shops',
+    location: 'Saibaba Colony, Coimbatore',
+    rating: 4.9,
+    reviewsCount: '2,100+',
+    image: 'https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=800&q=80',
+    ambienceImages: [
+      'https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=800&q=80'
+    ],
+    shortDescription: 'Freshly churned Italian gelatos, Belgian chocolate sundaes, and gourmet ice cream cakes.',
+    ratingBreakdown: { price: 4.7, quality: 5.0, quantity: 4.8, overall: 4.9 },
+    reviews: [
+      {
+        id: 'r7',
+        user: 'Sneha Patel',
+        avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80',
+        rating: 5,
+        date: '1 week ago',
+        comment: 'The sizzling brownie sundae with dark Belgian scoop is pure bliss!',
+        photo: 'https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=600&q=80',
+        video: null
+      }
+    ],
+    foodItemIds: ['item-6', 'item-13']
+  }
+];
+
+export const foodItemsData = [
+  {
+    id: 'item-1',
+    name: 'Crispy Ghee Roast Sambar Dosa',
+    cuisine: 'South Indian',
+    cuisineId: 'c-south-indian',
+    sellerId: 'seller-1',
+    sellerName: 'Annapoorna Heritage Hotel',
+    sellerType: 'Hotels',
+    price: 120,
+    originalPrice: 150,
+    rating: 4.8,
+    reviewsCount: 1420,
+    location: 'RS Puram, Coimbatore',
+    image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?auto=format&fit=crop&w=800&q=80'
+    ],
+    description: 'Golden paper-thin crepe roasted with pure cow ghee, served with signature drumstick sambar and trio of coconut & tomato chutneys.',
+    isVeg: true,
+    badge: 'Bestseller',
+    offerType: 'Percentage Discount',
+    offerBadge: '20% OFF',
+    ratingBreakdown: { price: 4.7, quality: 4.9, quantity: 4.7, overall: 4.8 },
+    reviews: [
+      {
+        id: 'rev-1',
+        user: 'Siddharth Rao',
+        avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80',
+        rating: 5,
+        date: 'Yesterday',
+        comment: 'Extra crispy with rich ghee aroma. The coconut chutney is freshly ground!',
+        photo: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80',
+        video: null
+      },
+      {
+        id: 'rev-2',
+        user: 'Ananya Sharma',
+        avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80',
+        rating: 4.7,
+        date: '3 days ago',
+        comment: 'Always consistent taste. Perfect breakfast food in Kovai.',
+        photo: null,
+        video: null
+      }
+    ],
+    relatedFoodIds: ['item-7', 'item-8', 'item-14']
+  },
+  {
+    id: 'item-2',
+    name: 'Seeraga Samba Mutton Dum Biryani',
+    cuisine: 'Biryani',
+    cuisineId: 'c-biryani',
+    sellerId: 'seller-2',
+    sellerName: 'Kovai Seeraga Samba Biryani Hub',
+    sellerType: 'Hotels',
+    price: 320,
+    originalPrice: 380,
+    rating: 4.9,
+    reviewsCount: 2890,
+    location: 'Gandhipuram, Coimbatore',
+    image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80'
+    ],
+    description: 'Authentic Kongu style Dum Biryani cooked with fragrant local Seeraga Samba rice, succulent mutton pieces, mint, and shallots.',
+    isVeg: false,
+    badge: 'Top Rated',
+    offerType: 'Buy One Get One',
+    offerBadge: 'BUY 1 GET 1 FREE',
+    ratingBreakdown: { price: 4.6, quality: 5.0, quantity: 4.9, overall: 4.9 },
+    reviews: [
+      {
+        id: 'rev-3',
+        user: 'Manoj Kumar',
+        avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=150&q=80',
+        rating: 5,
+        date: '2 days ago',
+        comment: 'The meat literally melts off the bone. Seeraga Samba rice is so digestable and aromatic.',
+        photo: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80',
+        video: null
+      }
+    ],
+    relatedFoodIds: ['item-9', 'item-15']
+  },
+  {
+    id: 'item-3',
+    name: 'Madurai Soft Bun Parotta & Spicy Chicken Salna',
+    cuisine: 'Parotta',
+    cuisineId: 'c-parotta',
+    sellerId: 'seller-3',
+    sellerName: 'Madurai Bun Parotta Grill & Street Spot',
+    sellerType: 'Street Food',
+    price: 160,
+    originalPrice: 200,
+    rating: 4.7,
+    reviewsCount: 1150,
+    location: 'Peelamedu, Coimbatore',
+    image: 'https://images.unsplash.com/photo-1604152135912-04a022e23696?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1604152135912-04a022e23696?auto=format&fit=crop&w=800&q=80'
+    ],
+    description: 'Thick, pillow-soft layered Bun Parotta deep roasted in ghee and paired with fiery Madurai style chicken gravy.',
+    isVeg: false,
+    badge: 'Trending',
+    offerType: 'Combo Offer',
+    offerBadge: 'COMBO SAVE 25%',
+    ratingBreakdown: { price: 4.9, quality: 4.7, quantity: 4.8, overall: 4.7 },
+    reviews: [
+      {
+        id: 'rev-4',
+        user: 'Deepak V',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
+        rating: 4.8,
+        date: '4 days ago',
+        comment: 'Fluffy like cake, crispy on the outside! Salna is spicy and super tasty.',
+        photo: null,
+        video: null
+      }
+    ],
+    relatedFoodIds: ['item-10']
+  },
+  {
+    id: 'item-4',
+    name: 'Cold-Pressed Watermelon Mint Detox Juice',
+    cuisine: 'Healthy Food',
+    cuisineId: 'c-healthy-food',
+    sellerId: 'seller-4',
+    sellerName: 'The Oasis Fresh Juice & Fruit Lounge',
+    sellerType: 'Juice Shops',
+    price: 90,
+    originalPrice: 110,
+    rating: 4.8,
+    reviewsCount: 890,
+    location: 'Race Course, Coimbatore',
+    image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80'
+    ],
+    description: 'Pure 100% natural watermelon juice blended with fresh garden mint leaves and lemon zest. Zero added sugar or water.',
+    isVeg: true,
+    badge: 'Healthy Pick',
+    offerType: 'One Day Offer',
+    offerBadge: 'SPECIAL ₹90 ONLY',
+    ratingBreakdown: { price: 4.8, quality: 4.9, quantity: 4.7, overall: 4.8 },
+    reviews: [
+      {
+        id: 'rev-5',
+        user: 'Meera K',
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
+        rating: 5,
+        date: '3 days ago',
+        comment: 'So refreshing after a workout! Love that they use real mint and no artificial syrup.',
+        photo: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80',
+        video: null
+      }
+    ],
+    relatedFoodIds: ['item-11', 'item-16']
+  },
+  {
+    id: 'item-5',
+    name: 'Classic Neapolitan Margherita Pizza',
+    cuisine: 'Italian',
+    cuisineId: 'c-italian',
+    sellerId: 'seller-5',
+    sellerName: 'Artisan Woodfired Pizza & Pasta Kitchen',
+    sellerType: 'Restaurants',
+    price: 340,
+    originalPrice: 420,
+    rating: 4.7,
+    reviewsCount: 650,
+    location: 'RS Puram, Coimbatore',
+    image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80'
+    ],
+    description: 'Authentic woodfired sourdough crust topped with San Marzano tomato sauce, fresh mozzarella di bufala, and extra virgin olive oil.',
+    isVeg: true,
+    badge: 'Chef Special',
+    offerType: 'Limited Offer',
+    offerBadge: 'FLAT ₹80 OFF',
+    ratingBreakdown: { price: 4.3, quality: 4.9, quantity: 4.6, overall: 4.7 },
+    reviews: [
+      {
+        id: 'rev-6',
+        user: 'Nikhil Verma',
+        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
+        rating: 4.7,
+        date: '5 days ago',
+        comment: 'Light sourdough texture with leopard spots on crust. Tastes like Naples!',
+        photo: null,
+        video: null
+      }
+    ],
+    relatedFoodIds: ['item-12']
+  },
+  {
+    id: 'item-6',
+    name: 'Belgian Chocolate Fudge Sundae',
+    cuisine: 'Ice Cream',
+    cuisineId: 'c-ice-cream',
+    sellerId: 'seller-6',
+    sellerName: 'Scoops & Cream Artisan Gelato Parlor',
+    sellerType: 'Ice Cream Shops',
+    price: 180,
+    originalPrice: 220,
+    rating: 4.9,
+    reviewsCount: 1680,
+    location: 'Saibaba Colony, Coimbatore',
+    image: 'https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=800&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=800&q=80'
+    ],
+    description: 'Double scoops of dark Belgian gelato layered with hot fudge sauce, roasted almonds, brownie chunks, and a maraschino cherry.',
+    isVeg: true,
+    badge: 'Must Try',
+    offerType: 'Special Offer',
+    offerBadge: 'FREE TOPPINGS',
+    ratingBreakdown: { price: 4.7, quality: 5.0, quantity: 4.9, overall: 4.9 },
+    reviews: [
+      {
+        id: 'rev-7',
+        user: 'Pooja Hegde',
+        avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80',
+        rating: 5,
+        date: '1 week ago',
+        comment: 'The chocolate quality is supreme. Generous portion of hot fudge sauce!',
+        photo: 'https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=600&q=80',
+        video: null
+      }
+    ],
+    relatedFoodIds: ['item-13']
+  },
+  {
+    id: 'item-7',
+    name: 'Special Mini Tiffin Combo Set',
+    cuisine: 'South Indian',
+    cuisineId: 'c-south-indian',
+    sellerId: 'seller-1',
+    sellerName: 'Annapoorna Heritage Hotel',
+    sellerType: 'Hotels',
+    price: 140,
+    originalPrice: 170,
+    rating: 4.8,
+    reviewsCount: 920,
+    location: 'RS Puram, Coimbatore',
+    image: 'https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?auto=format&fit=crop&w=800&q=80',
+    images: ['https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?auto=format&fit=crop&w=800&q=80'],
+    description: 'Platter featuring 1 Mini Rava Dosa, 1 Steamed Idli, 1 Crispy Medu Vada, Kesari Halwa, Sambar and Chutneys.',
+    isVeg: true,
+    badge: 'Popular Combo',
+    offerType: 'Combo Offer',
+    offerBadge: 'COMBO DISCOUNT',
+    ratingBreakdown: { price: 4.8, quality: 4.8, quantity: 4.9, overall: 4.8 },
+    reviews: [],
+    relatedFoodIds: ['item-1', 'item-8']
+  },
+  {
+    id: 'item-8',
+    name: 'Authentic Kovai Brass Filter Coffee',
+    cuisine: 'South Indian',
+    cuisineId: 'c-south-indian',
+    sellerId: 'seller-1',
+    sellerName: 'Annapoorna Heritage Hotel',
+    sellerType: 'Hotels',
+    price: 35,
+    originalPrice: 45,
+    rating: 4.9,
+    reviewsCount: 3100,
+    location: 'RS Puram, Coimbatore',
+    image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80',
+    images: ['https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80'],
+    description: 'Strong chicory-blended dark roasted coffee decoction frothing with fresh farm milk in a traditional brass Dabarah set.',
+    isVeg: true,
+    badge: 'Iconic Beverage',
+    offerType: null,
+    ratingBreakdown: { price: 5.0, quality: 4.9, quantity: 4.8, overall: 4.9 },
+    reviews: [],
+    relatedFoodIds: ['item-1', 'item-7']
+  },
+  {
+    id: 'item-9',
+    name: 'Pepper Fry Chicken Chukka',
+    cuisine: 'Biryani',
+    cuisineId: 'c-biryani',
+    sellerId: 'seller-2',
+    sellerName: 'Kovai Seeraga Samba Biryani Hub',
+    sellerType: 'Hotels',
+    price: 240,
+    originalPrice: 280,
+    rating: 4.8,
+    reviewsCount: 740,
+    location: 'Gandhipuram, Coimbatore',
+    image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=80',
+    images: ['https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=80'],
+    description: 'Country style chicken dry roasted in black pepper, curry leaves, ginger garlic and crushed shallow onions.',
+    isVeg: false,
+    badge: 'Spicy Kraze',
+    offerType: 'Percentage Discount',
+    offerBadge: '15% OFF',
+    ratingBreakdown: { price: 4.7, quality: 4.9, quantity: 4.8, overall: 4.8 },
+    reviews: [],
+    relatedFoodIds: ['item-2', 'item-15']
+  },
+  {
+    id: 'item-10',
+    name: 'Charcoal Grilled Chicken Kothu Parotta',
+    cuisine: 'Parotta',
+    cuisineId: 'c-parotta',
+    sellerId: 'seller-3',
+    sellerName: 'Madurai Bun Parotta Grill & Street Spot',
+    sellerType: 'Street Food',
+    price: 190,
+    originalPrice: 230,
+    rating: 4.6,
+    reviewsCount: 820,
+    location: 'Peelamedu, Coimbatore',
+    image: 'https://images.unsplash.com/photo-1604152135912-04a022e23696?auto=format&fit=crop&w=800&q=80',
+    images: ['https://images.unsplash.com/photo-1604152135912-04a022e23696?auto=format&fit=crop&w=800&q=80'],
+    description: 'Minced layered parotta tossed on hot iron flat top with shredded tandoori chicken, eggs, onion, and hot curry gravy.',
+    isVeg: false,
+    badge: 'Street Hit',
+    offerType: null,
+    ratingBreakdown: { price: 4.8, quality: 4.6, quantity: 4.7, overall: 4.6 },
+    reviews: [],
+    relatedFoodIds: ['item-3']
+  },
+  {
+    id: 'item-11',
+    name: 'Saffron Royal Badam Milkshake',
+    cuisine: 'Healthy Food',
+    cuisineId: 'c-healthy-food',
+    sellerId: 'seller-4',
+    sellerName: 'The Oasis Fresh Juice & Fruit Lounge',
+    sellerType: 'Juice Shops',
+    price: 110,
+    originalPrice: 130,
+    rating: 4.9,
+    reviewsCount: 560,
+    location: 'Race Course, Coimbatore',
+    image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80',
+    images: ['https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80'],
+    description: 'Chilled cream milk infused with crushed almonds, cardamom, Kashmir saffron strands, and crushed pistachio garnish.',
+    isVeg: true,
+    badge: 'Rich & Healthy',
+    offerType: 'Buy One Get One',
+    offerBadge: 'BUY 1 GET 1 FREE',
+    ratingBreakdown: { price: 4.7, quality: 5.0, quantity: 4.8, overall: 4.9 },
+    reviews: [],
+    relatedFoodIds: ['item-4', 'item-16']
+  },
+  {
+    id: 'item-12',
+    name: 'Creamy Truffle Mushroom Penne Pasta',
+    cuisine: 'Italian',
+    cuisineId: 'c-italian',
+    sellerId: 'seller-5',
+    sellerName: 'Artisan Woodfired Pizza & Pasta Kitchen',
+    sellerType: 'Restaurants',
+    price: 290,
+    originalPrice: 350,
+    rating: 4.6,
+    reviewsCount: 410,
+    location: 'RS Puram, Coimbatore',
+    image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80',
+    images: ['https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80'],
+    description: 'Penne pasta tossed in garlic parmesan white sauce with wild portobello mushrooms and black truffle oil infusion.',
+    isVeg: true,
+    badge: 'Gourmet',
+    offerType: null,
+    ratingBreakdown: { price: 4.4, quality: 4.8, quantity: 4.5, overall: 4.6 },
+    reviews: [],
+    relatedFoodIds: ['item-5']
+  },
+  {
+    id: 'item-13',
+    name: 'Mango Alphonso Sorbet & Gelato Scoop',
+    cuisine: 'Ice Cream',
+    cuisineId: 'c-ice-cream',
+    sellerId: 'seller-6',
+    sellerName: 'Scoops & Cream Artisan Gelato Parlor',
+    sellerType: 'Ice Cream Shops',
+    price: 130,
+    originalPrice: 160,
+    rating: 4.9,
+    reviewsCount: 880,
+    location: 'Saibaba Colony, Coimbatore',
+    image: 'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=800&q=80',
+    images: ['https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=800&q=80'],
+    description: 'Made from pure Ratnagiri Alphonso mango pulp with zero artificial flavors or colors.',
+    isVeg: true,
+    badge: 'Seasonal Favorite',
+    offerType: 'Percentage Discount',
+    offerBadge: '15% OFF',
+    ratingBreakdown: { price: 4.8, quality: 5.0, quantity: 4.8, overall: 4.9 },
+    reviews: [],
+    relatedFoodIds: ['item-6']
+  },
+  {
+    id: 'item-14',
+    name: 'Golden Podi Idli with Sesame Ghee',
+    cuisine: 'South Indian',
+    cuisineId: 'c-south-indian',
+    sellerId: 'seller-1',
+    sellerName: 'Annapoorna Heritage Hotel',
+    sellerType: 'Hotels',
+    price: 95,
+    originalPrice: 115,
+    rating: 4.8,
+    reviewsCount: 1040,
+    location: 'RS Puram, Coimbatore',
+    image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=80',
+    images: ['https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=80'],
+    description: 'Mini steamed rice cakes tossed in aromatic Gunpowder lentil spice mix and melted cow ghee.',
+    isVeg: true,
+    badge: 'Classic Snack',
+    offerType: 'One Day Offer',
+    offerBadge: 'OFFER ₹95',
+    ratingBreakdown: { price: 4.9, quality: 4.8, quantity: 4.8, overall: 4.8 },
+    reviews: [],
+    relatedFoodIds: ['item-1', 'item-7']
+  },
+  {
+    id: 'item-15',
+    name: 'Chettinad Spicy Chicken Dum Biryani',
+    cuisine: 'Biryani',
+    cuisineId: 'c-biryani',
+    sellerId: 'seller-2',
+    sellerName: 'Kovai Seeraga Samba Biryani Hub',
+    sellerType: 'Hotels',
+    price: 260,
+    originalPrice: 300,
+    rating: 4.8,
+    reviewsCount: 1950,
+    location: 'Gandhipuram, Coimbatore',
+    image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80',
+    images: ['https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80'],
+    description: 'Feisty Chettinad spiced chicken biryani topped with boiled egg, roasted cashew nuts, and onion pachadi.',
+    isVeg: false,
+    badge: 'Chef Choice',
+    offerType: 'Special Offer',
+    offerBadge: 'SPECIAL DEAL',
+    ratingBreakdown: { price: 4.7, quality: 4.9, quantity: 4.8, overall: 4.8 },
+    reviews: [],
+    relatedFoodIds: ['item-2', 'item-9']
+  },
+  {
+    id: 'item-16',
+    name: 'Avocado Spinach Protein Detox Bowl',
+    cuisine: 'Healthy Food',
+    cuisineId: 'c-healthy-food',
+    sellerId: 'seller-4',
+    sellerName: 'The Oasis Fresh Juice & Fruit Lounge',
+    sellerType: 'Juice Shops',
+    price: 210,
+    originalPrice: 260,
+    rating: 4.7,
+    reviewsCount: 480,
+    location: 'Race Course, Coimbatore',
+    image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80',
+    images: ['https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80'],
+    description: 'Blended Haas avocado, organic spinach, chia seeds, sliced bananas, pumpkin seeds, and wild honey drip.',
+    isVeg: true,
+    badge: 'Superfood',
+    offerType: 'Limited Offer',
+    offerBadge: 'FLAT ₹50 OFF',
+    ratingBreakdown: { price: 4.5, quality: 4.9, quantity: 4.7, overall: 4.7 },
+    reviews: [],
+    relatedFoodIds: ['item-4', 'item-11']
+  }
+];
+
+export const offersData = [
+  {
+    id: 'off-1',
+    title: 'BUY 1 GET 1 FREE - Seeraga Samba Mutton Biryani',
+    type: 'Cuisine Offer',
+    categoryType: 'Cuisines',
+    offerFilter: 'Buy One Get One',
+    targetCuisine: 'Biryani',
+    foodItem: foodItemsData[1],
+    sellerName: 'Kovai Seeraga Samba Biryani Hub',
+    originalPrice: 380,
+    offerPrice: 320,
+    discount: 'BUY 1 GET 1 FREE',
+    description: 'Order one Seeraga Samba Mutton Dum Biryani and get another complementary biryani free for discovery!',
+    validity: 'Valid till Sunday 11:59 PM',
+    image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    id: 'off-2',
+    title: '20% DISCOUNT - Crispy Ghee Roast Dosa',
+    type: 'Cuisine Offer',
+    categoryType: 'Cuisines',
+    offerFilter: 'Percentage Discount',
+    targetCuisine: 'South Indian',
+    foodItem: foodItemsData[0],
+    sellerName: 'Annapoorna Heritage Hotel',
+    originalPrice: 150,
+    offerPrice: 120,
+    discount: '20% OFF',
+    description: 'Special 20% discount on Annapoorna\'s legendary Ghee Roast Sambar Dosa for morning breakfast lovers.',
+    validity: 'Valid daily 7 AM - 11 AM',
+    image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    id: 'off-3',
+    title: 'COMBO DISCOUNTS - Madurai Bun Parotta & Salna',
+    type: 'Cuisine Offer',
+    categoryType: 'Cuisines',
+    offerFilter: 'Combo Offer',
+    targetCuisine: 'Parotta',
+    foodItem: foodItemsData[2],
+    sellerName: 'Madurai Bun Parotta Grill & Street Spot',
+    originalPrice: 200,
+    offerPrice: 160,
+    discount: 'COMBO SAVE 25%',
+    description: 'Get 2 Bun Parottas + 1 Chicken Salna + 1 Pepper Fry Chicken at 25% discount price combo!',
+    validity: 'Limited stock today',
+    image: 'https://images.unsplash.com/photo-1604152135912-04a022e23696?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    id: 'off-4',
+    title: 'ONE DAY SPECIAL - Cold-Pressed Watermelon Detox Juice',
+    type: 'Cuisine Offer',
+    categoryType: 'Cuisines',
+    offerFilter: 'One Day Offer',
+    targetCuisine: 'Healthy Food',
+    foodItem: foodItemsData[3],
+    sellerName: 'The Oasis Fresh Juice & Fruit Lounge',
+    originalPrice: 110,
+    offerPrice: 90,
+    discount: 'SPECIAL ₹90 ONLY',
+    description: 'Today only! Pure chilled watermelon mint detox juice at special promotional pricing.',
+    validity: 'Valid today only',
+    image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    id: 'off-5',
+    title: 'FLAT ₹80 OFF - Woodfired Neapolitan Pizza',
+    type: 'Cuisine Offer',
+    categoryType: 'Cuisines',
+    offerFilter: 'Limited Offer',
+    targetCuisine: 'Italian',
+    foodItem: foodItemsData[4],
+    sellerName: 'Artisan Woodfired Pizza & Pasta Kitchen',
+    originalPrice: 420,
+    offerPrice: 340,
+    discount: 'FLAT ₹80 OFF',
+    description: 'Exclusive flat ₹80 instant price reduction on sourdough Margherita woodfired pizzas.',
+    validity: 'Valid till stocks last',
+    image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    id: 'off-6',
+    title: 'ANNAPOORNA HOTEL SPECIAL - Heritage Breakfast Fest',
+    type: 'Seller Offer',
+    categoryType: 'Food Sellers',
+    offerFilter: 'Special Offer',
+    targetSeller: 'Annapoorna Heritage Hotel',
+    seller: foodSellersData[0],
+    originalPrice: 220,
+    offerPrice: 160,
+    discount: 'HERITAGE FEST DEAL',
+    description: 'Discover all breakfast items at Annapoorna RS Puram with special festive pricing & complimentary filter coffee.',
+    validity: 'Valid this week',
+    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    id: 'off-7',
+    title: 'KOVAI BIRYANI HUB - BOGO Mutton & Chicken Feast',
+    type: 'Seller Offer',
+    categoryType: 'Food Sellers',
+    offerFilter: 'Buy One Get One',
+    targetSeller: 'Kovai Seeraga Samba Biryani Hub',
+    seller: foodSellersData[1],
+    originalPrice: 450,
+    offerPrice: 320,
+    discount: 'BUY 1 GET 1 BOGO',
+    description: 'Buy any family bucket at Kovai Dum Biryani Hub and get a free chicken starter dish.',
+    validity: 'Valid on weekends',
+    image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    id: 'off-8',
+    title: 'THE OASIS JUICES - 1+1 Free Badam Milkshake',
+    type: 'Seller Offer',
+    categoryType: 'Food Sellers',
+    offerFilter: 'Buy One Get One',
+    targetSeller: 'The Oasis Fresh Juice & Fruit Lounge',
+    seller: foodSellersData[3],
+    originalPrice: 220,
+    offerPrice: 110,
+    discount: '1+1 BOGO OFFER',
+    description: 'Buy 1 Saffron Royal Badam Milkshake and get 1 extra Badam Shake completely free!',
+    validity: 'Valid 4 PM - 8 PM',
+    image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80'
+  }
+];
+
+export const recentSearches = [
+  "Chicken Biryani",
+  "Ghee Roast Dosa",
+  "Bun Parotta",
+  "Watermelon Juice",
+  "Woodfired Pizza",
+  "Belgian Ice Cream",
+  "Badam Milk"
+];
+
+export const offerFilterTypes = [
+  "All",
+  "Buy One Get One",
+  "Combo Offer",
+  "One Day Offer",
+  "Limited Offer",
+  "Percentage Discount",
+  "Special Offer"
+];

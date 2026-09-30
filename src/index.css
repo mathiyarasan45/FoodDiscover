@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme {
+  --color-warm-bg: #FAF6F0;
+  --color-warm-surface: #FFFFFF;
+  --color-warm-card: #FFFDF9;
+  --color-warm-border: #F3EFE6;
+  --color-orange-primary: #FF5E1E;
+  --color-orange-hover: #E04D12;
+  --color-orange-soft: #FFF3EE;
+  --color-green-healthy: #16A34A;
+  --color-green-soft: #F0FDF4;
+  --color-charcoal: #1C1917;
+  --color-charcoal-muted: #78716C;
+  --font-heading: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: #FAF6F0;
+    color: #1C1917;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom Soft Box Shadows */
+.shadow-soft {
+  box-shadow: 0 10px 30px -5px rgba(28, 25, 23, 0.05), 0 4px 12px -2px rgba(28, 25, 23, 0.03);
+}
+
+.shadow-soft-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.shadow-soft-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 35px -8px rgba(255, 94, 30, 0.12), 0 8px 20px -4px rgba(28, 25, 23, 0.06);
+}
+
+.shadow-orange-glow {
+  box-shadow: 0 8px 25px -4px rgba(255, 94, 30, 0.35);
+}
+
+/* Custom Hide Scrollbar for horizontal cards */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Smooth Horizontal Scroll Indicator */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #F3EFE6;
+  border-radius: 999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #FF5E1E;
+  border-radius: 999px;
+}
+
+/* Badge Pulse Animation */
+@keyframes pulse-subtle {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s infinite ease-in-out;
+}
