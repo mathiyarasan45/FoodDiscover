@@ -51,6 +51,8 @@ const parseJsonField = (fieldStr, fallback = []) => {
 // Format Food Item Record
 const formatFoodItem = (item) => {
   if (!item) return null;
+  const gallery = parseJsonField(item.gallery_image_urls, []);
+  const primaryImage = item.hero_image_url || gallery[0] || null;
   return {
     ...item,
     price: Number(item.price),
@@ -58,8 +60,10 @@ const formatFoodItem = (item) => {
     rating: Number(item.rating_overall),
     reviewsCount: item.reviews_count,
     isVeg: Boolean(item.is_veg),
-    image: item.hero_image_url,
-    images: parseJsonField(item.gallery_image_urls, [item.hero_image_url]),
+    hero_image_url: item.hero_image_url,
+    gallery_image_urls: gallery,
+    image: primaryImage,
+    images: gallery.length > 0 ? gallery : (primaryImage ? [primaryImage] : []),
     sellerId: item.seller_id,
     sellerName: item.seller_name,
     cuisineId: item.cuisine_id,
@@ -75,12 +79,16 @@ const formatFoodItem = (item) => {
 // Format Seller Record
 const formatSeller = (seller) => {
   if (!seller) return null;
+  const ambience = parseJsonField(seller.ambience_image_urls, []);
+  const primaryImage = seller.hero_image_url || ambience[0] || null;
   return {
     ...seller,
     rating: Number(seller.rating_overall),
     reviewsCount: seller.reviews_count,
-    image: seller.hero_image_url,
-    ambienceImages: parseJsonField(seller.ambience_image_urls, [seller.hero_image_url]),
+    hero_image_url: seller.hero_image_url,
+    ambience_image_urls: ambience,
+    image: primaryImage,
+    ambienceImages: ambience.length > 0 ? ambience : (primaryImage ? [primaryImage] : []),
     shortDescription: seller.short_description,
     fullDescription: seller.full_description,
     typeName: seller.type_name,
@@ -134,7 +142,7 @@ app.get('/api/food-sellers', (req, res) => {
   let sql = 'SELECT * FROM food_sellers WHERE 1=1';
   const params = [];
 
-  if (type_id) {
+  if (type_id && type_id !== 'All') {
     sql += ' AND (type_id = ? OR type_name = ?)';
     params.push(type_id, type_id);
   }
@@ -178,7 +186,7 @@ app.get('/api/food-items', (req, res) => {
   let sql = 'SELECT * FROM food_items WHERE 1=1';
   const params = [];
 
-  if (cuisine_id) {
+  if (cuisine_id && cuisine_id !== 'All') {
     sql += ' AND (cuisine_id = ? OR cuisine = ?)';
     params.push(cuisine_id, cuisine_id);
   }
@@ -237,23 +245,43 @@ app.get('/api/offers', (req, res) => {
   }
 
   const offers = db.prepare(sql).all(...params);
-  const formatted = offers.map(o => ({
-    id: o.id,
-    title: o.title,
-    description: o.description,
-    offerFilter: o.offer_filter_type,
-    categoryType: o.category_type,
-    targetCuisine: o.target_cuisine,
-    targetSeller: o.target_seller,
-    sellerName: o.seller_name,
-    originalPrice: Number(o.original_price),
-    offerPrice: Number(o.offer_price),
-    discount: o.discount_badge,
-    image: o.banner_image_url,
-    validity: o.validity_info,
-    targetFoodId: o.target_food_id,
-    targetSellerId: o.target_seller_id
-  }));
+  const formatted = offers.map(o => {
+    let targetFood = null;
+    let targetSeller = null;
+
+    if (o.target_food_id) {
+      const foodRow = db.prepare('SELECT * FROM food_items WHERE id = ?').get(o.target_food_id);
+      if (foodRow) targetFood = formatFoodItem(foodRow);
+    }
+    if (o.target_seller_id) {
+      const sellerRow = db.prepare('SELECT * FROM food_sellers WHERE id = ?').get(o.target_seller_id);
+      if (sellerRow) targetSeller = formatSeller(sellerRow);
+    }
+
+    // Determine offer image with fallback logic: banner_image_url -> target food image -> target seller image
+    const offerImage = o.banner_image_url || targetFood?.hero_image_url || targetFood?.image || targetSeller?.hero_image_url || targetSeller?.image || null;
+
+    return {
+      id: o.id,
+      title: o.title,
+      description: o.description,
+      offerFilter: o.offer_filter_type,
+      categoryType: o.category_type,
+      targetCuisine: o.target_cuisine,
+      targetSeller: o.target_seller,
+      sellerName: o.seller_name,
+      originalPrice: Number(o.original_price),
+      offerPrice: Number(o.offer_price),
+      discount: o.discount_badge,
+      banner_image_url: o.banner_image_url,
+      image: offerImage,
+      validity: o.validity_info,
+      targetFoodId: o.target_food_id,
+      targetSellerId: o.target_seller_id,
+      foodItem: targetFood,
+      seller: targetSeller
+    };
+  });
 
   res.json(formatted);
 });

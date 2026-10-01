@@ -73,10 +73,12 @@ export async function getCuisineById(id) {
 
 // 3. Food Items by Cuisine
 export async function getFoodItemsByCuisine(cuisineId) {
-  const fallback = foodItemsData.filter(item => 
-    item.cuisineId === cuisineId || 
-    item.cuisine.toLowerCase() === cuisineId.toLowerCase()
-  );
+  const fallback = (!cuisineId || cuisineId === 'All')
+    ? foodItemsData
+    : foodItemsData.filter(item => 
+        item.cuisineId === cuisineId || 
+        item.cuisine.toLowerCase() === cuisineId.toLowerCase()
+      );
   return fetchApi(`/food-items?cuisine_id=${encodeURIComponent(cuisineId)}`, {}, fallback);
 }
 
@@ -93,10 +95,12 @@ export async function getFoodSellerTypes() {
 
 // 6. Food Sellers by Type
 export async function getFoodSellersByType(typeId) {
-  const fallback = foodSellersData.filter(s => 
-    s.type === typeId || 
-    s.typeName === typeId
-  );
+  const fallback = (!typeId || typeId === 'All')
+    ? foodSellersData
+    : foodSellersData.filter(s => 
+        s.type === typeId || 
+        s.typeName === typeId
+      );
   return fetchApi(`/food-sellers?type_id=${encodeURIComponent(typeId)}`, {}, fallback);
 }
 

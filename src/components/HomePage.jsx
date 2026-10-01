@@ -225,79 +225,88 @@ export const HomePage = ({ onSelectFood, onSelectSeller, onNavigateTab, isWishli
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {filteredFoods.slice(0, 8).map((food) => (
-            <div
-              key={food.id}
-              onClick={() => onSelectFood(food)}
-              className="group bg-[#FFFDF9] hover:bg-[#FAF6F0] rounded-3xl border border-[#F3EFE6] hover:border-[#FF5E1E]/40 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col justify-between cursor-pointer"
-            >
-              <div className="relative h-44 overflow-hidden bg-stone-100">
-                <img
-                  src={food.image}
-                  alt={food.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                
-                {/* Wishlist Heart Button */}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onToggleWishlist(food);
-                  }}
-                  className={`absolute top-3 right-3 p-2 rounded-full backdrop-blur-md transition-transform active:scale-90 ${
-                    isWishlisted(food.id) 
-                      ? 'bg-white text-rose-500 shadow-md' 
-                      : 'bg-black/30 text-white hover:bg-white hover:text-rose-500'
-                  }`}
-                  title={isWishlisted(food.id) ? "Saved in Wishlist" : "Add to Wishlist"}
-                >
-                  <Heart className={`w-4 h-4 ${isWishlisted(food.id) ? 'fill-rose-500 text-rose-500' : ''}`} />
-                </button>
+          {filteredFoods.slice(0, 8).map((food) => {
+            const foodImg = food.hero_image_url || food.image || (food.gallery_image_urls && food.gallery_image_urls[0]) || (food.images && food.images[0]);
+            const galleryFallback = (food.gallery_image_urls && food.gallery_image_urls[0]) || (food.images && food.images[0]);
+            return (
+              <div
+                key={food.id}
+                onClick={() => onSelectFood(food)}
+                className="group bg-[#FFFDF9] hover:bg-[#FAF6F0] rounded-3xl border border-[#F3EFE6] hover:border-[#FF5E1E]/40 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col justify-between cursor-pointer"
+              >
+                <div className="relative h-44 overflow-hidden bg-stone-100">
+                  <img
+                    src={foodImg}
+                    alt={food.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    onError={(e) => {
+                      if (galleryFallback && e.target.src !== galleryFallback) {
+                        e.target.src = galleryFallback;
+                      }
+                    }}
+                  />
+                  
+                  {/* Wishlist Heart Button */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onToggleWishlist(food);
+                    }}
+                    className={`absolute top-3 right-3 p-2 rounded-full backdrop-blur-md transition-transform active:scale-90 ${
+                      isWishlisted(food.id) 
+                        ? 'bg-white text-rose-500 shadow-md' 
+                        : 'bg-black/30 text-white hover:bg-white hover:text-rose-500'
+                    }`}
+                    title={isWishlisted(food.id) ? "Saved in Wishlist" : "Add to Wishlist"}
+                  >
+                    <Heart className={`w-4 h-4 ${isWishlisted(food.id) ? 'fill-rose-500 text-rose-500' : ''}`} />
+                  </button>
 
-                {food.badge && (
-                  <span className="absolute top-3 left-3 bg-[#FF5E1E] text-white text-[11px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
-                    {food.badge}
-                  </span>
-                )}
-              </div>
+                  {food.badge && (
+                    <span className="absolute top-3 left-3 bg-[#FF5E1E] text-white text-[11px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                      {food.badge}
+                    </span>
+                  )}
+                </div>
 
-              <div className="p-4 space-y-2 flex-1 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between text-xs font-bold text-[#78716C] mb-1">
-                    <span className="text-[#FF5E1E] font-extrabold uppercase text-[10px]">{food.cuisine}</span>
-                    <span className="flex items-center gap-1 bg-amber-50 text-amber-800 px-2 py-0.5 rounded-md border border-amber-200">
-                      <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                      {food.rating}
+                <div className="p-4 space-y-2 flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between text-xs font-bold text-[#78716C] mb-1">
+                      <span className="text-[#FF5E1E] font-extrabold uppercase text-[10px]">{food.cuisine}</span>
+                      <span className="flex items-center gap-1 bg-amber-50 text-amber-800 px-2 py-0.5 rounded-md border border-amber-200">
+                        <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                        {food.rating}
+                      </span>
+                    </div>
+
+                    <h3 className="font-['Outfit'] font-bold text-base text-[#1C1917] group-hover:text-[#FF5E1E] line-clamp-1">
+                      {food.name}
+                    </h3>
+
+                    <div className="text-xs text-[#78716C] flex items-center gap-1 mt-1 truncate">
+                      <Store className="w-3.5 h-3.5 text-[#FF5E1E] shrink-0" />
+                      <span className="truncate font-semibold">{food.sellerName}</span>
+                    </div>
+
+                    <div className="text-[11px] text-[#78716C] flex items-center gap-1 mt-0.5">
+                      <MapPin className="w-3 h-3 text-[#78716C] shrink-0" />
+                      <span className="truncate">{food.location}</span>
+                    </div>
+                  </div>
+
+                  <div className="pt-3 border-t border-[#F3EFE6] flex items-center justify-between">
+                    <div>
+                      <span className="text-[10px] font-bold text-[#78716C] uppercase">Est. Price</span>
+                      <div className="font-['Outfit'] font-extrabold text-lg text-[#1C1917]">₹{food.price}</div>
+                    </div>
+                    <span className="text-xs font-extrabold text-[#FF5E1E] group-hover:translate-x-0.5 transition-transform flex items-center">
+                      Discover →
                     </span>
                   </div>
-
-                  <h3 className="font-['Outfit'] font-bold text-base text-[#1C1917] group-hover:text-[#FF5E1E] line-clamp-1">
-                    {food.name}
-                  </h3>
-
-                  <div className="text-xs text-[#78716C] flex items-center gap-1 mt-1 truncate">
-                    <Store className="w-3.5 h-3.5 text-[#FF5E1E] shrink-0" />
-                    <span className="truncate font-semibold">{food.sellerName}</span>
-                  </div>
-
-                  <div className="text-[11px] text-[#78716C] flex items-center gap-1 mt-0.5">
-                    <MapPin className="w-3 h-3 text-[#78716C] shrink-0" />
-                    <span className="truncate">{food.location}</span>
-                  </div>
-                </div>
-
-                <div className="pt-3 border-t border-[#F3EFE6] flex items-center justify-between">
-                  <div>
-                    <span className="text-[10px] font-bold text-[#78716C] uppercase">Est. Price</span>
-                    <div className="font-['Outfit'] font-extrabold text-lg text-[#1C1917]">₹{food.price}</div>
-                  </div>
-                  <span className="text-xs font-extrabold text-[#FF5E1E] group-hover:translate-x-0.5 transition-transform flex items-center">
-                    Discover →
-                  </span>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
@@ -319,42 +328,55 @@ export const HomePage = ({ onSelectFood, onSelectSeller, onNavigateTab, isWishli
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {filteredSellers.slice(0, 3).map((seller) => (
-            <div
-              key={seller.id}
-              onClick={() => onSelectSeller(seller)}
-              className="group bg-[#FFFDF9] hover:bg-[#FAF6F0] rounded-3xl border border-[#F3EFE6] hover:border-[#FF5E1E]/40 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col justify-between cursor-pointer"
-            >
-              <div className="relative h-48 overflow-hidden bg-stone-100">
-                <img src={seller.image} alt={seller.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <span className="absolute top-3 left-3 bg-[#1C1917] text-white text-[11px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
-                  {seller.typeName}
-                </span>
-                <span className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-md text-[#1C1917] text-xs font-extrabold px-2.5 py-1 rounded-xl shadow-sm flex items-center gap-1">
-                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                  {seller.rating} ({seller.reviewsCount})
-                </span>
-              </div>
+          {filteredSellers.slice(0, 3).map((seller) => {
+            const sellerImg = seller.hero_image_url || seller.image || (seller.ambience_image_urls && seller.ambience_image_urls[0]) || (seller.ambienceImages && seller.ambienceImages[0]);
+            const ambienceFallback = (seller.ambience_image_urls && seller.ambience_image_urls[0]) || (seller.ambienceImages && seller.ambienceImages[0]);
+            return (
+              <div
+                key={seller.id}
+                onClick={() => onSelectSeller(seller)}
+                className="group bg-[#FFFDF9] hover:bg-[#FAF6F0] rounded-3xl border border-[#F3EFE6] hover:border-[#FF5E1E]/40 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col justify-between cursor-pointer"
+              >
+                <div className="relative h-48 overflow-hidden bg-stone-100">
+                  <img
+                    src={sellerImg}
+                    alt={seller.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    onError={(e) => {
+                      if (ambienceFallback && e.target.src !== ambienceFallback) {
+                        e.target.src = ambienceFallback;
+                      }
+                    }}
+                  />
+                  <span className="absolute top-3 left-3 bg-[#1C1917] text-white text-[11px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+                    {seller.typeName}
+                  </span>
+                  <span className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-md text-[#1C1917] text-xs font-extrabold px-2.5 py-1 rounded-xl shadow-sm flex items-center gap-1">
+                    <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                    {seller.rating} ({seller.reviewsCount})
+                  </span>
+                </div>
 
-              <div className="p-5 space-y-2">
-                <h3 className="font-['Outfit'] font-bold text-lg text-[#1C1917] group-hover:text-[#FF5E1E] truncate">
-                  {seller.name}
-                </h3>
-                <p className="text-xs text-[#78716C] line-clamp-2 font-medium">
-                  {seller.shortDescription}
-                </p>
-                <div className="flex items-center gap-1 text-xs font-semibold text-[#78716C] pt-1">
-                  <MapPin className="w-3.5 h-3.5 text-[#FF5E1E] shrink-0" />
-                  <span>{seller.location}</span>
+                <div className="p-5 space-y-2">
+                  <h3 className="font-['Outfit'] font-bold text-lg text-[#1C1917] group-hover:text-[#FF5E1E] truncate">
+                    {seller.name}
+                  </h3>
+                  <p className="text-xs text-[#78716C] line-clamp-2 font-medium">
+                    {seller.shortDescription}
+                  </p>
+                  <div className="flex items-center gap-1 text-xs font-semibold text-[#78716C] pt-1">
+                    <MapPin className="w-3.5 h-3.5 text-[#FF5E1E] shrink-0" />
+                    <span>{seller.location}</span>
+                  </div>
+                </div>
+
+                <div className="px-5 pb-5 pt-2 border-t border-[#F3EFE6] flex items-center justify-between text-xs font-bold text-[#FF5E1E]">
+                  <span>View Full Seller Menu & Rating</span>
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </div>
               </div>
-
-              <div className="px-5 pb-5 pt-2 border-t border-[#F3EFE6] flex items-center justify-between text-xs font-bold text-[#FF5E1E]">
-                <span>View Full Seller Menu & Rating</span>
-                <span className="group-hover:translate-x-1 transition-transform">→</span>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
@@ -379,20 +401,33 @@ export const HomePage = ({ onSelectFood, onSelectSeller, onNavigateTab, isWishli
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {foods.slice(0, 3).map((food) => (
-              <div
-                key={food.id}
-                onClick={() => onSelectFood(food)}
-                className="bg-white/10 hover:bg-white/20 border border-white/10 p-3.5 rounded-2xl transition-all cursor-pointer flex items-center space-x-3"
-              >
-                <img src={food.image} alt={food.name} className="w-16 h-16 rounded-xl object-cover shrink-0" />
-                <div className="min-w-0 flex-1">
-                  <div className="text-[10px] font-bold text-[#FF8C38] uppercase truncate">{food.cuisine}</div>
-                  <div className="text-sm font-bold text-white truncate">{food.name}</div>
-                  <div className="text-xs text-stone-300 font-extrabold mt-0.5">₹{food.price} • {food.sellerName}</div>
+            {foods.slice(0, 3).map((food) => {
+              const recImg = food.hero_image_url || food.image || (food.gallery_image_urls && food.gallery_image_urls[0]);
+              const recFallback = (food.gallery_image_urls && food.gallery_image_urls[0]);
+              return (
+                <div
+                  key={food.id}
+                  onClick={() => onSelectFood(food)}
+                  className="bg-white/10 hover:bg-white/20 border border-white/10 p-3.5 rounded-2xl transition-all cursor-pointer flex items-center space-x-3"
+                >
+                  <img
+                    src={recImg}
+                    alt={food.name}
+                    className="w-16 h-16 rounded-xl object-cover shrink-0"
+                    onError={(e) => {
+                      if (recFallback && e.target.src !== recFallback) {
+                        e.target.src = recFallback;
+                      }
+                    }}
+                  />
+                  <div className="min-w-0 flex-1">
+                    <div className="text-[10px] font-bold text-[#FF8C38] uppercase truncate">{food.cuisine}</div>
+                    <div className="text-sm font-bold text-white truncate">{food.name}</div>
+                    <div className="text-xs text-stone-300 font-extrabold mt-0.5">₹{food.price} • {food.sellerName}</div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -462,36 +497,63 @@ export const HomePage = ({ onSelectFood, onSelectSeller, onNavigateTab, isWishli
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {offers.slice(0, 3).map((offer) => (
-            <div
-              key={offer.id}
-              onClick={() => onNavigateTab('offers')}
-              className="bg-[#FFFDF9] hover:bg-[#FAF6F0] rounded-3xl border border-[#F3EFE6] hover:border-[#FF5E1E]/40 p-5 shadow-sm hover:shadow-md transition-all cursor-pointer space-y-4 flex flex-col justify-between"
-            >
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="bg-[#FF5E1E] text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase">
-                    {offer.offerFilter}
-                  </span>
-                  <span className="text-[11px] font-bold text-[#78716C]">{offer.validity}</span>
-                </div>
-                <h3 className="font-['Outfit'] font-bold text-base text-[#1C1917] line-clamp-2">
-                  {offer.title}
-                </h3>
-                <p className="text-xs text-[#78716C] font-medium line-clamp-2">
-                  {offer.description}
-                </p>
-              </div>
+          {offers.slice(0, 3).map((offer) => {
+            const offerImg = offer.banner_image_url || offer.image || offer.foodItem?.hero_image_url || offer.foodItem?.image || offer.seller?.hero_image_url || offer.seller?.image;
+            const targetFallback = offer.foodItem?.hero_image_url || offer.seller?.hero_image_url;
+            return (
+              <div
+                key={offer.id}
+                onClick={() => onNavigateTab('offers')}
+                className="group bg-[#FFFDF9] hover:bg-[#FAF6F0] rounded-3xl border border-[#F3EFE6] hover:border-[#FF5E1E]/40 p-5 shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer space-y-4 flex flex-col justify-between"
+              >
+                <div className="space-y-3">
+                  {/* Visible Offer Image Container */}
+                  <div className="relative h-44 rounded-2xl overflow-hidden bg-stone-100">
+                    <img
+                      src={offerImg}
+                      alt={offer.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => {
+                        if (targetFallback && e.target.src !== targetFallback) {
+                          e.target.src = targetFallback;
+                        }
+                      }}
+                    />
+                    <span className="absolute top-3 left-3 bg-[#FF5E1E] text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase shadow-md">
+                      {offer.offerFilter}
+                    </span>
+                    {offer.discount && (
+                      <span className="absolute bottom-3 right-3 bg-black/80 text-white text-xs font-extrabold px-2.5 py-1 rounded-lg">
+                        {offer.discount}
+                      </span>
+                    )}
+                  </div>
 
-              <div className="pt-3 border-t border-[#F3EFE6] flex items-center justify-between">
-                <div>
-                  <span className="text-[10px] text-[#78716C] uppercase font-bold">Offer Discount</span>
-                  <div className="font-['Outfit'] font-extrabold text-lg text-[#FF5E1E]">{offer.discount}</div>
+                  <div>
+                    <div className="flex items-center justify-between text-[11px] font-bold text-[#78716C] mb-1">
+                      <span className="text-[#FF5E1E] uppercase text-[10px] font-extrabold">{offer.sellerName || offer.targetSeller}</span>
+                      <span>{offer.validity}</span>
+                    </div>
+                    <h3 className="font-['Outfit'] font-bold text-base text-[#1C1917] group-hover:text-[#FF5E1E] line-clamp-2">
+                      {offer.title}
+                    </h3>
+                  </div>
+
+                  <p className="text-xs text-[#78716C] font-medium line-clamp-2">
+                    {offer.description}
+                  </p>
                 </div>
-                <span className="text-xs font-bold text-[#1C1917] group-hover:text-[#FF5E1E]">View Offer →</span>
+
+                <div className="pt-3 border-t border-[#F3EFE6] flex items-center justify-between">
+                  <div>
+                    <span className="text-[10px] text-[#78716C] uppercase font-bold">Offer Discount</span>
+                    <div className="font-['Outfit'] font-extrabold text-lg text-[#FF5E1E]">{offer.discount}</div>
+                  </div>
+                  <span className="text-xs font-bold text-[#1C1917] group-hover:text-[#FF5E1E]">View Offer →</span>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 

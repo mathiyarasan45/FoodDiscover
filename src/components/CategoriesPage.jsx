@@ -133,56 +133,69 @@ export const CategoriesPage = ({ onSelectFood, onSelectSeller, isWishlisted, onT
         {/* South Indian Food Items List */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {cuisineFoods.length > 0 ? (
-            cuisineFoods.map((food) => (
-              <div
-                key={food.id}
-                onClick={() => onSelectFood(food)}
-                className="group bg-[#FFFDF9] hover:bg-[#FAF6F0] rounded-3xl border border-[#F3EFE6] hover:border-[#FF5E1E]/40 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col justify-between cursor-pointer"
-              >
-                <div className="relative h-48 overflow-hidden bg-stone-100">
-                  <img src={food.image} alt={food.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-                  
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onToggleWishlist(food);
-                    }}
-                    className={`absolute top-3 right-3 p-2 rounded-full backdrop-blur-md transition-all ${
-                      isWishlisted(food.id) ? 'bg-white text-rose-500 shadow-md' : 'bg-black/30 text-white hover:bg-white hover:text-rose-500'
-                    }`}
-                  >
-                    <Heart className={`w-4 h-4 ${isWishlisted(food.id) ? 'fill-rose-500 text-rose-500' : ''}`} />
-                  </button>
+            cuisineFoods.map((food) => {
+              const foodImg = food.hero_image_url || food.image || (food.gallery_image_urls && food.gallery_image_urls[0]) || (food.images && food.images[0]);
+              const galleryFallback = (food.gallery_image_urls && food.gallery_image_urls[0]) || (food.images && food.images[0]);
+              return (
+                <div
+                  key={food.id}
+                  onClick={() => onSelectFood(food)}
+                  className="group bg-[#FFFDF9] hover:bg-[#FAF6F0] rounded-3xl border border-[#F3EFE6] hover:border-[#FF5E1E]/40 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col justify-between cursor-pointer"
+                >
+                  <div className="relative h-48 overflow-hidden bg-stone-100">
+                    <img
+                      src={foodImg}
+                      alt={food.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => {
+                        if (galleryFallback && e.target.src !== galleryFallback) {
+                          e.target.src = galleryFallback;
+                        }
+                      }}
+                    />
+                    
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onToggleWishlist(food);
+                      }}
+                      className={`absolute top-3 right-3 p-2 rounded-full backdrop-blur-md transition-all ${
+                        isWishlisted(food.id) ? 'bg-white text-rose-500 shadow-md' : 'bg-black/30 text-white hover:bg-white hover:text-rose-500'
+                      }`}
+                    >
+                      <Heart className={`w-4 h-4 ${isWishlisted(food.id) ? 'fill-rose-500 text-rose-500' : ''}`} />
+                    </button>
 
-                  <span className="absolute bottom-3 left-3 bg-white/95 text-[#1C1917] text-xs font-extrabold px-2.5 py-1 rounded-xl shadow-xs flex items-center gap-1">
-                    <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                    {food.rating} ({food.reviewsCount})
-                  </span>
-                </div>
+                    <span className="absolute bottom-3 left-3 bg-white/95 text-[#1C1917] text-xs font-extrabold px-2.5 py-1 rounded-xl shadow-xs flex items-center gap-1">
+                      <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                      {food.rating} ({food.reviewsCount})
+                    </span>
+                  </div>
 
-                <div className="p-5 space-y-2">
-                  <h3 className="font-['Outfit'] font-bold text-lg text-[#1C1917] group-hover:text-[#FF5E1E] line-clamp-1">
-                    {food.name}
-                  </h3>
-                  <div className="text-xs text-[#78716C] flex items-center gap-1.5 font-semibold">
-                    <Store className="w-4 h-4 text-[#FF5E1E] shrink-0" />
-                    <span className="truncate">{food.sellerName}</span>
+                  <div className="p-5 space-y-2">
+                    <h3 className="font-['Outfit'] font-bold text-lg text-[#1C1917] group-hover:text-[#FF5E1E] line-clamp-1">
+                      {food.name}
+                    </h3>
+                    <div className="text-xs text-[#78716C] flex items-center gap-1.5 font-semibold">
+                      <Store className="w-4 h-4 text-[#FF5E1E] shrink-0" />
+                      <span className="truncate">{food.sellerName}</span>
+                    </div>
+                    <div className="text-xs text-[#78716C] flex items-center gap-1">
+                      <MapPin className="w-3.5 h-3.5 text-[#78716C] shrink-0" />
+                      <span>{food.location}</span>
+                    </div>
                   </div>
-                  <div className="text-xs text-[#78716C] flex items-center gap-1">
-                    <MapPin className="w-3.5 h-3.5 text-[#78716C] shrink-0" />
-                    <span>{food.location}</span>
-                  </div>
-                </div>
 
-                <div className="px-5 pb-5 pt-2 border-t border-[#F3EFE6] flex items-center justify-between">
-                  <div>
-                    <span className="text-[10px] text-[#78716C] uppercase font-bold">Price</span>
-                    <div className="font-['Outfit'] font-extrabold text-xl text-[#FF5E1E]">₹{food.price}</div>
+                  <div className="px-5 pb-5 pt-2 border-t border-[#F3EFE6] flex items-center justify-between">
+                    <div>
+                      <span className="text-[10px] text-[#78716C] uppercase font-bold">Price</span>
+                      <div className="font-['Outfit'] font-extrabold text-xl text-[#FF5E1E]">₹{food.price}</div>
+                    </div>
+                    <span className="text-xs font-extrabold text-[#1C1917] group-hover:text-[#FF5E1E]">View Details →</span>
                   </div>
-                  <span className="text-xs font-extrabold text-[#1C1917] group-hover:text-[#FF5E1E]">View Details →</span>
                 </div>
-              </div>
-            ))
+              );
+            })
           ) : (
             <div className="col-span-full bg-[#FFFDF9] p-8 rounded-3xl border border-[#F3EFE6] text-center text-sm font-medium text-[#78716C]">
               No food items listed for {selectedCuisine.name} currently.
@@ -236,22 +249,34 @@ export const CategoriesPage = ({ onSelectFood, onSelectSeller, isWishlisted, onT
         {/* Seller Cards List */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {sellersOfCategory.length > 0 ? (
-            sellersOfCategory.map((seller) => (
-              <div
-                key={seller.id}
-                onClick={() => onSelectSeller(seller)}
-                className="group bg-[#FFFDF9] hover:bg-[#FAF6F0] rounded-3xl border border-[#F3EFE6] hover:border-[#FF5E1E]/40 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col justify-between cursor-pointer"
-              >
-                <div className="relative h-48 overflow-hidden bg-stone-100">
-                  <img src={seller.image} alt={seller.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-                  <span className="absolute top-3 left-3 bg-[#1C1917] text-white text-[11px] font-extrabold px-3 py-1 rounded-full uppercase">
-                    {seller.typeName}
-                  </span>
-                  <span className="absolute bottom-3 right-3 bg-white/95 text-[#1C1917] text-xs font-extrabold px-2.5 py-1 rounded-xl shadow-xs flex items-center gap-1">
-                    <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                    {seller.rating}
-                  </span>
-                </div>
+            sellersOfCategory.map((seller) => {
+              const sellerImg = seller.hero_image_url || seller.image || (seller.ambience_image_urls && seller.ambience_image_urls[0]) || (seller.ambienceImages && seller.ambienceImages[0]);
+              const ambienceFallback = (seller.ambience_image_urls && seller.ambience_image_urls[0]) || (seller.ambienceImages && seller.ambienceImages[0]);
+              return (
+                <div
+                  key={seller.id}
+                  onClick={() => onSelectSeller(seller)}
+                  className="group bg-[#FFFDF9] hover:bg-[#FAF6F0] rounded-3xl border border-[#F3EFE6] hover:border-[#FF5E1E]/40 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col justify-between cursor-pointer"
+                >
+                  <div className="relative h-48 overflow-hidden bg-stone-100">
+                    <img
+                      src={sellerImg}
+                      alt={seller.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => {
+                        if (ambienceFallback && e.target.src !== ambienceFallback) {
+                          e.target.src = ambienceFallback;
+                        }
+                      }}
+                    />
+                    <span className="absolute top-3 left-3 bg-[#1C1917] text-white text-[11px] font-extrabold px-3 py-1 rounded-full uppercase">
+                      {seller.typeName}
+                    </span>
+                    <span className="absolute bottom-3 right-3 bg-white/95 text-[#1C1917] text-xs font-extrabold px-2.5 py-1 rounded-xl shadow-xs flex items-center gap-1">
+                      <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                      {seller.rating}
+                    </span>
+                  </div>
 
                 <div className="p-5 space-y-2">
                   <h3 className="font-['Outfit'] font-bold text-lg text-[#1C1917] group-hover:text-[#FF5E1E]">
@@ -271,7 +296,8 @@ export const CategoriesPage = ({ onSelectFood, onSelectSeller, isWishlisted, onT
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </div>
               </div>
-            ))
+            );
+          })
           ) : (
             <div className="col-span-full bg-[#FFFDF9] p-8 rounded-3xl border border-[#F3EFE6] text-center text-sm font-medium text-[#78716C]">
               No listings under {selectedSellerType.name} at the moment.

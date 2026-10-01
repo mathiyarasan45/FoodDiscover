@@ -116,48 +116,61 @@ export const OffersPage = ({ onSelectFood, onSelectSeller }) => {
 
         {cuisinesOffers.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {cuisinesOffers.map((offer) => (
-              <div
-                key={offer.id}
-                onClick={() => setActiveOfferDetail(offer)}
-                className="group bg-[#FFFDF9] hover:bg-[#FAF6F0] rounded-3xl border border-[#F3EFE6] hover:border-[#FF5E1E]/40 p-5 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between cursor-pointer space-y-4"
-              >
-                <div className="space-y-3">
-                  <div className="relative h-44 rounded-2xl overflow-hidden bg-stone-100">
-                    <img src={offer.image} alt={offer.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-                    <span className="absolute top-3 left-3 bg-[#FF5E1E] text-white text-[11px] font-extrabold px-3 py-1 rounded-full uppercase shadow-md">
-                      {offer.offerFilter}
-                    </span>
-                    <span className="absolute bottom-3 right-3 bg-black/80 text-white text-xs font-extrabold px-2.5 py-1 rounded-lg">
-                      {offer.discount}
-                    </span>
-                  </div>
-
-                  <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#FF5E1E]">Cuisine: {offer.targetCuisine}</span>
-                    <h3 className="font-['Outfit'] font-bold text-base text-[#1C1917] group-hover:text-[#FF5E1E] line-clamp-1 mt-0.5">
-                      {offer.title}
-                    </h3>
-                    <div className="text-xs text-[#78716C] flex items-center gap-1 mt-1 font-semibold">
-                      <Store className="w-3.5 h-3.5 text-[#FF5E1E]" />
-                      <span>{offer.sellerName}</span>
+            {cuisinesOffers.map((offer) => {
+              const offerImg = offer.banner_image_url || offer.image || offer.foodItem?.hero_image_url || offer.foodItem?.image || offer.seller?.hero_image_url || offer.seller?.image;
+              const fallbackImg = offer.foodItem?.hero_image_url || offer.seller?.hero_image_url;
+              return (
+                <div
+                  key={offer.id}
+                  onClick={() => setActiveOfferDetail(offer)}
+                  className="group bg-[#FFFDF9] hover:bg-[#FAF6F0] rounded-3xl border border-[#F3EFE6] hover:border-[#FF5E1E]/40 p-5 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between cursor-pointer space-y-4"
+                >
+                  <div className="space-y-3">
+                    <div className="relative h-44 rounded-2xl overflow-hidden bg-stone-100">
+                      <img
+                        src={offerImg}
+                        alt={offer.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        onError={(e) => {
+                          if (fallbackImg && e.target.src !== fallbackImg) {
+                            e.target.src = fallbackImg;
+                          }
+                        }}
+                      />
+                      <span className="absolute top-3 left-3 bg-[#FF5E1E] text-white text-[11px] font-extrabold px-3 py-1 rounded-full uppercase shadow-md">
+                        {offer.offerFilter}
+                      </span>
+                      <span className="absolute bottom-3 right-3 bg-black/80 text-white text-xs font-extrabold px-2.5 py-1 rounded-lg">
+                        {offer.discount}
+                      </span>
                     </div>
+
+                    <div>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#FF5E1E]">Cuisine: {offer.targetCuisine}</span>
+                      <h3 className="font-['Outfit'] font-bold text-base text-[#1C1917] group-hover:text-[#FF5E1E] line-clamp-1 mt-0.5">
+                        {offer.title}
+                      </h3>
+                      <div className="text-xs text-[#78716C] flex items-center gap-1 mt-1 font-semibold">
+                        <Store className="w-3.5 h-3.5 text-[#FF5E1E]" />
+                        <span>{offer.sellerName}</span>
+                      </div>
+                    </div>
+
+                    <p className="text-xs text-[#78716C] font-medium line-clamp-2">
+                      {offer.description}
+                    </p>
                   </div>
 
-                  <p className="text-xs text-[#78716C] font-medium line-clamp-2">
-                    {offer.description}
-                  </p>
-                </div>
-
-                <div className="pt-3 border-t border-[#F3EFE6] flex items-center justify-between">
-                  <div className="flex items-baseline space-x-2">
-                    <span className="font-['Outfit'] font-extrabold text-xl text-[#FF5E1E]">₹{offer.offerPrice}</span>
-                    <span className="text-xs font-semibold text-[#78716C] line-through">₹{offer.originalPrice}</span>
+                  <div className="pt-3 border-t border-[#F3EFE6] flex items-center justify-between">
+                    <div className="flex items-baseline space-x-2">
+                      <span className="font-['Outfit'] font-extrabold text-xl text-[#FF5E1E]">₹{offer.offerPrice}</span>
+                      <span className="text-xs font-semibold text-[#78716C] line-through">₹{offer.originalPrice}</span>
+                    </div>
+                    <span className="text-xs font-extrabold text-[#1C1917] group-hover:text-[#FF5E1E]">View Offer Details →</span>
                   </div>
-                  <span className="text-xs font-extrabold text-[#1C1917] group-hover:text-[#FF5E1E]">View Offer Details →</span>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         ) : (
           <div className="bg-[#FFFDF9] p-8 rounded-3xl border border-[#F3EFE6] text-center text-sm font-medium text-[#78716C]">
@@ -180,44 +193,57 @@ export const OffersPage = ({ onSelectFood, onSelectSeller }) => {
 
         {foodSellersOffers.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {foodSellersOffers.map((offer) => (
-              <div
-                key={offer.id}
-                onClick={() => setActiveOfferDetail(offer)}
-                className="group bg-[#FFFDF9] hover:bg-[#FAF6F0] rounded-3xl border border-[#F3EFE6] hover:border-[#FF5E1E]/40 p-5 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between cursor-pointer space-y-4"
-              >
-                <div className="space-y-3">
-                  <div className="relative h-44 rounded-2xl overflow-hidden bg-stone-100">
-                    <img src={offer.image} alt={offer.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-                    <span className="absolute top-3 left-3 bg-[#1C1917] text-white text-[11px] font-extrabold px-3 py-1 rounded-full uppercase">
-                      {offer.targetSeller}
-                    </span>
-                    <span className="absolute bottom-3 right-3 bg-[#FF5E1E] text-white text-xs font-extrabold px-2.5 py-1 rounded-lg">
-                      {offer.discount}
-                    </span>
-                  </div>
-
-                  <div>
-                    <h3 className="font-['Outfit'] font-bold text-base text-[#1C1917] group-hover:text-[#FF5E1E] line-clamp-2">
-                      {offer.title}
-                    </h3>
-                    <div className="text-xs text-[#78716C] flex items-center gap-1 mt-1 font-semibold">
-                      <Clock className="w-3.5 h-3.5 text-[#FF5E1E]" />
-                      <span>{offer.validity}</span>
+            {foodSellersOffers.map((offer) => {
+              const offerImg = offer.banner_image_url || offer.image || offer.foodItem?.hero_image_url || offer.foodItem?.image || offer.seller?.hero_image_url || offer.seller?.image;
+              const fallbackImg = offer.seller?.hero_image_url || offer.foodItem?.hero_image_url;
+              return (
+                <div
+                  key={offer.id}
+                  onClick={() => setActiveOfferDetail(offer)}
+                  className="group bg-[#FFFDF9] hover:bg-[#FAF6F0] rounded-3xl border border-[#F3EFE6] hover:border-[#FF5E1E]/40 p-5 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between cursor-pointer space-y-4"
+                >
+                  <div className="space-y-3">
+                    <div className="relative h-44 rounded-2xl overflow-hidden bg-stone-100">
+                      <img
+                        src={offerImg}
+                        alt={offer.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        onError={(e) => {
+                          if (fallbackImg && e.target.src !== fallbackImg) {
+                            e.target.src = fallbackImg;
+                          }
+                        }}
+                      />
+                      <span className="absolute top-3 left-3 bg-[#1C1917] text-white text-[11px] font-extrabold px-3 py-1 rounded-full uppercase">
+                        {offer.targetSeller}
+                      </span>
+                      <span className="absolute bottom-3 right-3 bg-[#FF5E1E] text-white text-xs font-extrabold px-2.5 py-1 rounded-lg">
+                        {offer.discount}
+                      </span>
                     </div>
+
+                    <div>
+                      <h3 className="font-['Outfit'] font-bold text-base text-[#1C1917] group-hover:text-[#FF5E1E] line-clamp-2">
+                        {offer.title}
+                      </h3>
+                      <div className="text-xs text-[#78716C] flex items-center gap-1 mt-1 font-semibold">
+                        <Clock className="w-3.5 h-3.5 text-[#FF5E1E]" />
+                        <span>{offer.validity}</span>
+                      </div>
+                    </div>
+
+                    <p className="text-xs text-[#78716C] font-medium line-clamp-2">
+                      {offer.description}
+                    </p>
                   </div>
 
-                  <p className="text-xs text-[#78716C] font-medium line-clamp-2">
-                    {offer.description}
-                  </p>
+                  <div className="pt-3 border-t border-[#F3EFE6] flex items-center justify-between">
+                    <span className="text-xs font-extrabold text-[#FF5E1E]">{offer.offerFilter}</span>
+                    <span className="text-xs font-extrabold text-[#1C1917] group-hover:text-[#FF5E1E]">View Seller Offer →</span>
+                  </div>
                 </div>
-
-                <div className="pt-3 border-t border-[#F3EFE6] flex items-center justify-between">
-                  <span className="text-xs font-extrabold text-[#FF5E1E]">{offer.offerFilter}</span>
-                  <span className="text-xs font-extrabold text-[#1C1917] group-hover:text-[#FF5E1E]">View Seller Offer →</span>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         ) : (
           <div className="bg-[#FFFDF9] p-8 rounded-3xl border border-[#F3EFE6] text-center text-sm font-medium text-[#78716C]">
@@ -242,8 +268,18 @@ export const OffersPage = ({ onSelectFood, onSelectSeller }) => {
               </button>
             </div>
 
-            <div className="h-52 rounded-2xl overflow-hidden border border-[#F3EFE6]">
-              <img src={activeOfferDetail.image} alt={activeOfferDetail.title} className="w-full h-full object-cover" />
+            <div className="h-52 rounded-2xl overflow-hidden border border-[#F3EFE6] bg-stone-100">
+              <img
+                src={activeOfferDetail.banner_image_url || activeOfferDetail.image || activeOfferDetail.foodItem?.hero_image_url || activeOfferDetail.seller?.hero_image_url}
+                alt={activeOfferDetail.title}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  const fallback = activeOfferDetail.foodItem?.hero_image_url || activeOfferDetail.seller?.hero_image_url;
+                  if (fallback && e.target.src !== fallback) {
+                    e.target.src = fallback;
+                  }
+                }}
+              />
             </div>
 
             <div className="space-y-2">
